@@ -142,15 +142,24 @@ const App: React.FC = () => {
   }
 
   function getPossibleBids(bidding: BidRecord[]) {
-    if (biddingSoFar.length === 0) {
+    if (_.isEmpty(biddingSoFar)) {
       return allBiddingSequence;
     }
     return allBiddingSequence.slice(getLastBidIndexInAllBids(_.last(bidding)) + 1);
   }
 
+  function undoLastBid() {
+    if (_.isEmpty(biddingSoFar)) {
+      return
+    }
+    setBidding(biddingSoFar.slice(0, biddingSoFar.length - 1));
+    setBidder(currentBidder === "N" ? "S" : "N");
+  }
+
   return (
     <div className="App">
       <button onClick={resetBidding}>Reset Bidding</button>
+      <button onClick={undoLastBid}>Undo</button>
       <br />
       {biddingSoFar.map(bidRecord => (
         <div key={bidRecord.bidKey}>
