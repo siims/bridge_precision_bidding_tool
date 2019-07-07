@@ -118,6 +118,7 @@ interface BidRecord {
 const App: React.FC = () => {
   const [currentBidder, setBidder] = useState<Seat>("N");
   const [biddingSoFar, setBidding] = useState<BidRecord[]>([]);
+  const [bidDetails, setBidDetails] = useState<Bid | undefined>();
 
   function handleMakeBid(event: React.SyntheticEvent<HTMLButtonElement>) {
     const bidKey: BidKey = event.currentTarget.dataset.bidkey as BidKey;
@@ -156,6 +157,21 @@ const App: React.FC = () => {
     setBidder(currentBidder === "N" ? "S" : "N");
   }
 
+  function displayBidDetails(event: React.SyntheticEvent<HTMLButtonElement>) {
+    const bidKey: BidKey = event.currentTarget.dataset.bidkey as BidKey;
+    if (_.isEmpty(biddingSoFar)) {
+      setBidDetails(biddingSystem[bidKey]);
+    } else {
+      // tslint:disable-next-line:no-non-null-assertion
+      const lastBid = _.last(biddingSoFar)!.bid;
+      if (lastBid.responses && lastBid.responses[bidKey]) {
+        setBidDetails(lastBid.responses[bidKey]);
+      } else {
+        setBidDetails(naturalBid);
+      }
+    }
+  }
+
   return (
     <div className="App">
       <button onClick={resetBidding}>Reset Bidding</button>
@@ -173,10 +189,11 @@ const App: React.FC = () => {
         {_.isEmpty(biddingSoFar) && <div />}
       </div>
       {getPossibleBids(biddingSoFar).map(bidKey => (
-        <button key={bidKey} data-bidkey={bidKey} onClick={handleMakeBid}>
+        <button key={bidKey} data-bidkey={bidKey} onClick={handleMakeBid} onMouseEnter={displayBidDetails}>
           {bidKey}
         </button>
       ))}
+      {bidDetails && <div>{bidDetails.description}</div>}
     </div>
   );
 };
