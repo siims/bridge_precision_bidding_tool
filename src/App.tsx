@@ -150,7 +150,7 @@ const App: React.FC = () => {
 
   function undoLastBid() {
     if (_.isEmpty(biddingSoFar)) {
-      return
+      return;
     }
     setBidding(biddingSoFar.slice(0, biddingSoFar.length - 1));
     setBidder(currentBidder === "N" ? "S" : "N");
@@ -161,11 +161,15 @@ const App: React.FC = () => {
       <button onClick={resetBidding}>Reset Bidding</button>
       <button onClick={undoLastBid}>Undo</button>
       <br />
-      {biddingSoFar.map(bidRecord => (
-        <div key={bidRecord.bidKey}>
-          {bidRecord.seat} - {bidRecord.bidKey} - {bidRecord.bid.description}
-        </div>
-      ))}
+      <div style={{display: "grid", gridTemplateColumns: "50% 50%"}}>
+        {biddingSoFar.map(bidRecord => (
+          <div key={bidRecord.bidKey}>
+            {bidRecord.seat} - {bidRecord.bidKey} - {bidRecord.bid.description}
+          </div>
+        ))}
+        <div>*</div>
+        {_.isEmpty(biddingSoFar) && <div />}
+      </div>
       {getPossibleBids(biddingSoFar).map(bidKey => (
         <button key={bidKey} data-bidkey={bidKey} onClick={handleMakeBid}>
           {bidKey}
