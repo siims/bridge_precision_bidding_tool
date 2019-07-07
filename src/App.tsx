@@ -115,10 +115,15 @@ interface BidRecord {
   bid: Bid;
 }
 
+interface PotentialBid {
+  description: string;
+  bidKey: BidKey;
+}
+
 const App: React.FC = () => {
   const [currentBidder, setBidder] = useState<Seat>("N");
   const [biddingSoFar, setBidding] = useState<BidRecord[]>([]);
-  const [bidDetails, setBidDetails] = useState<Bid | undefined>();
+  const [potentialBidDetails, setPotentialBidDetails] = useState<PotentialBid | undefined>();
 
   function handleMakeBid(event: React.SyntheticEvent<HTMLButtonElement>) {
     const bidKey: BidKey = event.currentTarget.dataset.bidkey as BidKey;
@@ -160,14 +165,18 @@ const App: React.FC = () => {
   function displayBidDetails(event: React.SyntheticEvent<HTMLButtonElement>) {
     const bidKey: BidKey = event.currentTarget.dataset.bidkey as BidKey;
     if (_.isEmpty(biddingSoFar)) {
-      setBidDetails(biddingSystem[bidKey]);
+      if (biddingSystem[bidKey]) {
+        setPotentialBidDetails({bidKey, description: biddingSystem[bidKey].description});
+      } else {
+        setPotentialBidDetails({bidKey, description: naturalBid.description});
+      }
     } else {
       // tslint:disable-next-line:no-non-null-assertion
       const lastBid = _.last(biddingSoFar)!.bid;
       if (lastBid.responses && lastBid.responses[bidKey]) {
-        setBidDetails(lastBid.responses[bidKey]);
+        setPotentialBidDetails({bidKey, description: lastBid.responses[bidKey].description});
       } else {
-        setBidDetails(naturalBid);
+        setPotentialBidDetails({bidKey, description: naturalBid.description});
       }
     }
   }
@@ -188,12 +197,24 @@ const App: React.FC = () => {
         <div>*</div>
         {_.isEmpty(biddingSoFar) && <div />}
       </div>
-      {getPossibleBids(biddingSoFar).map(bidKey => (
-        <button key={bidKey} data-bidkey={bidKey} onClick={handleMakeBid} onMouseEnter={displayBidDetails}>
-          {bidKey}
-        </button>
-      ))}
-      {bidDetails && <div>{bidDetails.description}</div>}
+      {potentialBidDetails && (
+        <div>
+          <strong>{potentialBidDetails.bidKey}</strong> {potentialBidDetails.description}
+        </div>
+      )}
+      <div style={{display: "grid", gridTemplateColumns: "3rem 3rem 3rem 3rem 3rem"}}>
+        {getPossibleBids(biddingSoFar).map(bidKey => (
+          <button
+            key={bidKey}
+            data-bidkey={bidKey}
+            onClick={handleMakeBid}
+            onMouseEnter={displayBidDetails}
+            onPointerEnter={displayBidDetails}
+          >
+            {bidKey}
+          </button>
+        ))}
+      </div>
     </div>
   );
 };
