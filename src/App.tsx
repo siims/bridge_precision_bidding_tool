@@ -162,9 +162,11 @@ const App: React.FC = () => {
       <button onClick={undoLastBid}>Undo</button>
       <br />
       <div style={{display: "grid", gridTemplateColumns: "50% 50%"}}>
+        <div>N</div>
+        <div>S</div>
         {biddingSoFar.map(bidRecord => (
           <div key={bidRecord.bidKey}>
-            {bidRecord.seat} - {bidRecord.bidKey} - {bidRecord.bid.description}
+            <strong>{bidRecord.bidKey}</strong> - {bidRecord.bid.description}
           </div>
         ))}
         <div>*</div>
