@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/static/css/main.9f133355.chunk.css",
-    "main.js": "/static/js/main.18cc7210.chunk.js",
-    "main.js.map": "/static/js/main.18cc7210.chunk.js.map",
-    "runtime~main.js": "/static/js/runtime~main.a8a9905a.js",
-    "runtime~main.js.map": "/static/js/runtime~main.a8a9905a.js.map",
-    "static/js/2.ffad0bf6.chunk.js": "/static/js/2.ffad0bf6.chunk.js",
-    "static/js/2.ffad0bf6.chunk.js.map": "/static/js/2.ffad0bf6.chunk.js.map",
-    "index.html": "/index.html",
-    "precache-manifest.3321bfcbeef2b683bc770a2c2ab01dd9.js": "/precache-manifest.3321bfcbeef2b683bc770a2c2ab01dd9.js",
-    "service-worker.js": "/service-worker.js",
-    "static/css/main.9f133355.chunk.css.map": "/static/css/main.9f133355.chunk.css.map"
+    "main.css": "/bridge_precision_bidding_tool/static/css/main.c0bfb9dc.chunk.css",
+    "main.js": "/bridge_precision_bidding_tool/static/js/main.908295d5.chunk.js",
+    "main.js.map": "/bridge_precision_bidding_tool/static/js/main.908295d5.chunk.js.map",
+    "runtime~main.js": "/bridge_precision_bidding_tool/static/js/runtime~main.4ba8c86c.js",
+    "runtime~main.js.map": "/bridge_precision_bidding_tool/static/js/runtime~main.4ba8c86c.js.map",
+    "static/js/2.ffad0bf6.chunk.js": "/bridge_precision_bidding_tool/static/js/2.ffad0bf6.chunk.js",
+    "static/js/2.ffad0bf6.chunk.js.map": "/bridge_precision_bidding_tool/static/js/2.ffad0bf6.chunk.js.map",
+    "index.html": "/bridge_precision_bidding_tool/index.html",
+    "precache-manifest.44ec0865a0921c92a7204f4df1903061.js": "/bridge_precision_bidding_tool/precache-manifest.44ec0865a0921c92a7204f4df1903061.js",
+    "service-worker.js": "/bridge_precision_bidding_tool/service-worker.js",
+    "static/css/main.c0bfb9dc.chunk.css.map": "/bridge_precision_bidding_tool/static/css/main.c0bfb9dc.chunk.css.map"
   }
 }
