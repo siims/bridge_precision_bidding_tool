@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import "./App.css";
 import _ from "lodash";
 
@@ -131,10 +131,10 @@ const App: React.FC = () => {
     if (lastElement) {
       const lastBid: Bid = lastElement.bid;
       const currentBid: Bid = (lastBid.responses && lastBid.responses[bidKey]) || naturalBid;
-      setBidding([...biddingSoFar, {seat: currentBidder, bidKey, bid: currentBid}]);
+      setBidding([...biddingSoFar, { seat: currentBidder, bidKey, bid: currentBid }]);
     } else {
       const currentBid: Bid = biddingSystem[bidKey] ? biddingSystem[bidKey] : naturalBid;
-      setBidding([{seat: currentBidder, bidKey, bid: currentBid}]);
+      setBidding([{ seat: currentBidder, bidKey, bid: currentBid }]);
     }
     setBidder(currentBidder === "N" ? "S" : "N");
   }
@@ -166,19 +166,41 @@ const App: React.FC = () => {
     const bidKey: BidKey = event.currentTarget.dataset.bidkey as BidKey;
     if (_.isEmpty(biddingSoFar)) {
       if (biddingSystem[bidKey]) {
-        setPotentialBidDetails({bidKey, description: biddingSystem[bidKey].description});
+        setPotentialBidDetails({ bidKey, description: biddingSystem[bidKey].description });
       } else {
-        setPotentialBidDetails({bidKey, description: naturalBid.description});
+        setPotentialBidDetails({ bidKey, description: naturalBid.description });
       }
     } else {
       // tslint:disable-next-line:no-non-null-assertion
       const lastBid = _.last(biddingSoFar)!.bid;
       if (lastBid.responses && lastBid.responses[bidKey]) {
-        setPotentialBidDetails({bidKey, description: lastBid.responses[bidKey].description});
+        setPotentialBidDetails({ bidKey, description: lastBid.responses[bidKey].description });
       } else {
-        setPotentialBidDetails({bidKey, description: naturalBid.description});
+        setPotentialBidDetails({ bidKey, description: naturalBid.description });
       }
     }
+  }
+
+  function getResponsesToLastBid(): PotentialBid[] {
+    const potentialBids: PotentialBid[] = [];
+
+    const lastBid = _.last(biddingSoFar);
+    if (_.isEmpty(biddingSoFar)) {
+      for (const [key, value] of Object.entries(biddingSystem)) {
+        potentialBids.push({
+          bidKey: key as BidKey,
+          description: value.description
+        });
+      }
+    } else if (lastBid && lastBid.bid.responses) {
+      for (const [key, value] of Object.entries(lastBid.bid.responses)) {
+        potentialBids.push({
+          bidKey: key as BidKey,
+          description: value.description
+        });
+      }
+    }
+    return potentialBids;
   }
 
   return (
@@ -186,7 +208,8 @@ const App: React.FC = () => {
       <button onClick={resetBidding}>Reset Bidding</button>
       <button onClick={undoLastBid}>Undo</button>
       <br />
-      <div style={{display: "grid", gridTemplateColumns: "50% 50%"}}>
+      {/* BIDDING SO FAR VISUALIZED */}
+      <div style={{ display: "grid", gridTemplateColumns: "50% 50%" }}>
         <div>N</div>
         <div>S</div>
         {biddingSoFar.map(bidRecord => (
@@ -197,26 +220,39 @@ const App: React.FC = () => {
         <div>*</div>
         {_.isEmpty(biddingSoFar) && <div />}
       </div>
+      {/* BIDDING BUTTON HOVER */}
       {potentialBidDetails && (
         <div>
           <strong>{potentialBidDetails.bidKey}</strong> {potentialBidDetails.description}
         </div>
       )}
-      <div style={{display: "grid", gridTemplateColumns: "3rem 3rem 3rem 3rem 3rem"}}>
+      {/* BIDDING BUTTONS*/}
+      <div style={{ display: "grid", gridTemplateColumns: "3rem 3rem 3rem 3rem 3rem" }}>
         {getPossibleBids(biddingSoFar).map(bidKey => {
           const rowNumber = Number(bidKey[0]);
-          const columnNumber = bidKey[1] === "C" ? 1 : bidKey[1] === "D" ? 2 : bidKey[1] === "H" ? 3 : bidKey[1] === "S" ? 4 : 5;
-          return <button
-            key={bidKey}
-            data-bidkey={bidKey}
-            onClick={handleMakeBid}
-            onMouseEnter={displayBidDetails}
-            onPointerEnter={displayBidDetails}
-            style={{gridArea: `${rowNumber} / ${columnNumber} / ${rowNumber + 1} / ${columnNumber + 1}`}}
-          >
-            {bidKey}
-          </button>
+          const columnNumber =
+            bidKey[1] === "C" ? 1 : bidKey[1] === "D" ? 2 : bidKey[1] === "H" ? 3 : bidKey[1] === "S" ? 4 : 5;
+          return (
+            <button
+              key={bidKey}
+              data-bidkey={bidKey}
+              onClick={handleMakeBid}
+              onMouseEnter={displayBidDetails}
+              onPointerEnter={displayBidDetails}
+              style={{ gridArea: `${rowNumber} / ${columnNumber} / ${rowNumber + 1} / ${columnNumber + 1}` }}
+            >
+              {bidKey}
+            </button>
+          );
         })}
+      </div>
+      {/* RESPONSE SUMMARY */}
+      <div >
+      {getResponsesToLastBid().map(potentialBid => (
+        <div key={potentialBid.bidKey}>
+          <strong>{potentialBid.bidKey}</strong> - {potentialBid.description}
+        </div>
+      ))}
       </div>
     </div>
   );
