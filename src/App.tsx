@@ -203,17 +203,20 @@ const App: React.FC = () => {
         </div>
       )}
       <div style={{display: "grid", gridTemplateColumns: "3rem 3rem 3rem 3rem 3rem"}}>
-        {getPossibleBids(biddingSoFar).map(bidKey => (
-          <button
+        {getPossibleBids(biddingSoFar).map(bidKey => {
+          const rowNumber = Number(bidKey[0]);
+          const columnNumber = bidKey[1] === "C" ? 1 : bidKey[1] === "D" ? 2 : bidKey[1] === "H" ? 3 : bidKey[1] === "S" ? 4 : 5;
+          return <button
             key={bidKey}
             data-bidkey={bidKey}
             onClick={handleMakeBid}
             onMouseEnter={displayBidDetails}
             onPointerEnter={displayBidDetails}
+            style={{gridArea: `${rowNumber} / ${columnNumber} / ${rowNumber + 1} / ${columnNumber + 1}`}}
           >
             {bidKey}
           </button>
-        ))}
+        })}
       </div>
     </div>
   );
