@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "9cdc625648f9c188bfe1a3f029b3971d",
+    "revision": "86c47b3ecbd73a758be0cb701d4083a4",
     "url": "/bridge_precision_bidding_tool/index.html"
   },
   {
-    "revision": "368d34d1f72c7cdcd0a0",
+    "revision": "3c00a811888cff3cf274",
     "url": "/bridge_precision_bidding_tool/static/css/main.c0bfb9dc.chunk.css"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/bridge_precision_bidding_tool/static/js/2.ffad0bf6.chunk.js"
   },
   {
-    "revision": "368d34d1f72c7cdcd0a0",
-    "url": "/bridge_precision_bidding_tool/static/js/main.679e1ded.chunk.js"
+    "revision": "3c00a811888cff3cf274",
+    "url": "/bridge_precision_bidding_tool/static/js/main.21bf903d.chunk.js"
   },
   {
     "revision": "ec1fde3483e2cfeb5e2a",
