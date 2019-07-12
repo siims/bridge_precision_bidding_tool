@@ -74,6 +74,61 @@ const standardOneNoTrumpResponses: { [bid: string]: Bid } = {
   }
 };
 
+const reverseFlanneryResponses = (bid: BidKey) => {
+  const responses = {
+    "2S": {
+      description: "to play"
+    },
+    "2N": {
+      description: "INV, asking",
+      alertable: true,
+      responses: {
+        "3C": {
+          description: "weak, 5S-4H",
+          alertable: true,
+          responses: {
+            "3D": {
+              description: "asking for 4th suit stopper",
+              alertable: true
+            }
+          }
+        },
+        "3D": {
+          description: "GF, 5S-4H",
+          alertable: true
+        },
+        "3H": {
+          description: "weak, 5S-5+H",
+          alertable: true
+        },
+        "3S": {
+          description: "GF, 5S-5H",
+          alertable: true
+        }
+      }
+    },
+    "3C": {
+      description: "to play"
+    },
+    "3D": {
+      description: "to play"
+    },
+    "3H": {
+      description: "preemptive"
+    },
+    "3S": {
+      description: "preemptive"
+    },
+    "3N": {
+      description: "to play"
+    }
+  };
+  if (bid === "2S") {
+    delete responses["2S"]
+  }
+  return responses
+};
+
 const stayman = (bidKey: BidKey): Bid => {
   return {
     description: "Stayman",
@@ -102,9 +157,11 @@ function checkback(bidKey: BidKey): Bid {
 export const biddingSystem: { [bid: string]: Bid } = {
   "1C": {
     description: "F, 16+ HCP (or 17+ balanced)",
+    alertable: true,
     responses: {
       "1D": {
         description: "0-7 HCP, any shape",
+        alertable: true,
         responses: {
           "1H": {
             description: "4+H, F1",
@@ -501,6 +558,7 @@ export const biddingSystem: { [bid: string]: Bid } = {
       },
       "1H": {
         description: "GF, 8-11 HCP, any shape; by passed hand: 5+H, 8-10 HCP",
+        alertable: true,
         responses: {}
       },
       "1S": {
@@ -553,8 +611,32 @@ export const biddingSystem: { [bid: string]: Bid } = {
         responses: {}
       },
       "2S": {
-        description: "GF, 12+ HCP, any (4441) (2NT asks for singleton); by passed hand: 8-10 HCP (4441)",
-        responses: {}
+        description: "GF, 12+ HCP, any (4441); by passed hand: 8-10 HCP (4441)",
+        alertable: true,
+        responses: {
+          "2NT": {
+            description: "asks for singleton",
+            alertable: true,
+            responses: {
+              "3C": {
+                description: "1C",
+                alertable: true
+              },
+              "3D": {
+                description: "1D",
+                alertable: true
+              },
+              "3H": {
+                description: "1H",
+                alertable: true
+              },
+              "3S": {
+                description: "1S",
+                alertable: true
+              }
+            }
+          }
+        }
       },
       interference: {
         description:
@@ -567,9 +649,11 @@ export const biddingSystem: { [bid: string]: Bid } = {
   },
   "1D": {
     description: "2+D, Good 10 to 15 HCP",
+    alertable: true,
     responses: {
       "1H": {
         description: "F1, 4+H",
+        alertable: true,
         responses: {
           "1S": {
             description: "NF, 4+S"
@@ -608,6 +692,7 @@ export const biddingSystem: { [bid: string]: Bid } = {
       },
       "1S": {
         description: "F1, 4+S",
+        alertable: true,
         responses: {
           "1N": {
             description: "NF, 11-13 HCP",
@@ -861,90 +946,52 @@ export const biddingSystem: { [bid: string]: Bid } = {
       },
       "2H": {
         description: "below INV, 5S-4/5H, less than invitational. Reverse Flannery",
-        responses: {
-          "2S": {
-            description: "to play"
-          },
-          "2N": {
-            description: "INV, asking",
-            alertable: true,
-            responses: {
-              "3C": {
-                description: "weak, 5S-4H",
-                alertable: true,
-                responses: {
-                  "3D": {
-                    description: "asking for 4th suit stopper",
-                    alertable: true
-                  }
-                }
-              },
-              "3D": {
-                description: "GF, 5S-4H",
-                alertable: true
-              },
-              "3H": {
-                description: "weak, 5S-5+H",
-                alertable: true
-              },
-              "3S": {
-                description: "GF, 5S-5H",
-                alertable: true
-              }
-            }
-          },
-          "3C": {
-            description: "to play"
-          },
-          "3D": {
-            description: "to play"
-          },
-          "3H": {
-            description: "preemptive"
-          },
-          "3S": {
-            description: "preemptive"
-          },
-          "3N": {
-            description: "to play"
-          }
-        }
+        alertable: true,
+        responses: reverseFlanneryResponses("2H")
       },
       "2S": {
-        description: "INV, 5S-4/5H"
+        description: "INV, 5S-4/5H, 6-9 HCP",
+        alertable: true,
+        responses: reverseFlanneryResponses("2S")
       },
       "2N": {
         description: "INV, 11-12 HCP, no 4M"
       },
       "3C": {
-        description: "below INV, 5-4 minors at least, either could be longer"
+        description: "below INV, 5-4 minors at least, either could be longer, 6-10 HCP",
+        alertable: true
       },
       "3D": {
-        description: "below INV, 6+D"
+        description: "below INV, 6+D, 5-10 HCP",
+        alertable: true
       },
       "3H": {
-        description: "7+H, weak"
+        description: "7+H, weak 5-10 HCP"
       },
       "3S": {
-        description: "7+S, weak"
+        description: "7+S, weak 5-10 HCP"
       },
       "3N": {
         description: "13-16 HCP, balanced, no 4M"
       },
       "4C": {
-        description: "below INV, 5+C-5+D"
+        description: "below INV, 5+C-5+D",
+        alertable: true
       },
       "4D": {
-        description: "to play, wide-range"
+        description: "7+D, to play, wide-range",
+        alertable: true
       },
       "4H": {
-        description: "to play, wide-range"
+        description: "7+H, to play, wide-range",
+        alertable: true
       },
       "4S": {
-        description: "to play, wide-range"
+        description: "7+S, to play, wide-range",
+        alertable: true
       },
       interference: {
-        description: "Treat mostly like a standard 1♦ opening after interference\n\tJumps to 3♣, 3♦ retain their meaning as above\n\tResponder bidding diamonds is not a raise but a new suit"
+        description: "Treat mostly like a standard 1D opening after interference\n\tJumps to 3C, 3D retain their meaning as above\n\tResponder bidding diamonds is not a raise but a new suit"
       }
     }
   },
@@ -955,10 +1002,12 @@ export const biddingSystem: { [bid: string]: Bid } = {
     description: "5+S, Good 10 to 15 HCP"
   },
   "1N": {
-    description: "Balanced, 14-16 HCP"
+    description: "Balanced, 14-16 HCP",
+    alertable: true
   },
   "2C": {
     description: "6+C, Good 10 to 15 HCP",
+    alertable: true,
     responses: {
       "2D": {
         description: "invite or better inquiry",
@@ -1005,6 +1054,7 @@ export const biddingSystem: { [bid: string]: Bid } = {
   },
   "2D": {
     description: "4414/4405/3415/4315, Good 10 to 15 HCP",
+    alertable: true,
     responses: {
 
       "2H": {
@@ -1065,6 +1115,7 @@ export const biddingSystem: { [bid: string]: Bid } = {
     description: "7+S, weak"
   },
   "3N": {
-    description: "Gambling - 7+ suit AKQ"
+    description: "Gambling - 7+ suit AKQ",
+    alertable: true,
   },
 };

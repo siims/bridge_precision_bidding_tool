@@ -18,6 +18,7 @@ interface BidRecord {
 interface PotentialBid {
   description: string;
   bidKey: BidKey;
+  alertable?: boolean;
 }
 
 const App: React.FC = () => {
@@ -66,7 +67,11 @@ const App: React.FC = () => {
     const bidKey: BidKey = event.currentTarget.dataset.bidkey as BidKey;
     if (_.isEmpty(biddingSoFar)) {
       if (biddingSystem[bidKey]) {
-        setPotentialBidDetails({ bidKey, description: biddingSystem[bidKey].description });
+        setPotentialBidDetails({
+          bidKey,
+          description: biddingSystem[bidKey].description,
+          alertable: biddingSystem[bidKey].alertable
+        });
       } else {
         setPotentialBidDetails({ bidKey, description: naturalBid.description });
       }
@@ -74,7 +79,11 @@ const App: React.FC = () => {
       // tslint:disable-next-line:no-non-null-assertion
       const lastBid = _.last(biddingSoFar)!.bid;
       if (lastBid.responses && lastBid.responses[bidKey]) {
-        setPotentialBidDetails({ bidKey, description: lastBid.responses[bidKey].description });
+        setPotentialBidDetails({
+          bidKey,
+          description: lastBid.responses[bidKey].description,
+          alertable: lastBid.responses[bidKey].alertable
+        });
       } else {
         setPotentialBidDetails({ bidKey, description: naturalBid.description });
       }
@@ -122,7 +131,7 @@ const App: React.FC = () => {
       </div>
       {/* BIDDING BUTTON HOVER */}
       {potentialBidDetails && (
-        <div>
+        <div style={{color: `${potentialBidDetails.alertable ? "#00f" : "#000"}`}}>
           <strong>{potentialBidDetails.bidKey}</strong> {potentialBidDetails.description}
         </div>
       )}
