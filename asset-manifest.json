@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/bridge_precision_bidding_tool/static/css/main.c0bfb9dc.chunk.css",
-    "main.js": "/bridge_precision_bidding_tool/static/js/main.21bf903d.chunk.js",
-    "main.js.map": "/bridge_precision_bidding_tool/static/js/main.21bf903d.chunk.js.map",
+    "main.js": "/bridge_precision_bidding_tool/static/js/main.08b4f7d0.chunk.js",
+    "main.js.map": "/bridge_precision_bidding_tool/static/js/main.08b4f7d0.chunk.js.map",
     "runtime~main.js": "/bridge_precision_bidding_tool/static/js/runtime~main.4ba8c86c.js",
     "runtime~main.js.map": "/bridge_precision_bidding_tool/static/js/runtime~main.4ba8c86c.js.map",
     "static/js/2.ffad0bf6.chunk.js": "/bridge_precision_bidding_tool/static/js/2.ffad0bf6.chunk.js",
     "static/js/2.ffad0bf6.chunk.js.map": "/bridge_precision_bidding_tool/static/js/2.ffad0bf6.chunk.js.map",
     "index.html": "/bridge_precision_bidding_tool/index.html",
-    "precache-manifest.e90e9cd372646f0d6e1ec1cb942264fc.js": "/bridge_precision_bidding_tool/precache-manifest.e90e9cd372646f0d6e1ec1cb942264fc.js",
+    "precache-manifest.7f8f16999817602c4e8c7d7071120bb4.js": "/bridge_precision_bidding_tool/precache-manifest.7f8f16999817602c4e8c7d7071120bb4.js",
     "service-worker.js": "/bridge_precision_bidding_tool/service-worker.js",
     "static/css/main.c0bfb9dc.chunk.css.map": "/bridge_precision_bidding_tool/static/css/main.c0bfb9dc.chunk.css.map"
   }
