@@ -8,6 +8,8 @@ export type BidKey = "pass" | "dbl" | "rdbl" | "interference" | "undiscussed" | 
   "6C" | "6D" | "6H" | "6S" | "6N" |
   "7C" | "7D" | "7H" | "7S" | "7N"
 
+const alertable = true;
+
 // prettier-ignore
 export const allBiddingSequence: BidKey[] = [
   "1C", "1D", "1H", "1S", "1N",
@@ -47,7 +49,7 @@ export const staymanResponses = (bidKey: BidKey): { [bid: string]: Bid } => {
 const staymanResponsesOnFirstLevel: { [bid: string]: Bid } = {
   "2D": {
     description: "no 4 card major",
-    alertable: true
+    alertable
   },
   "2H": {
     description: "4 card suit"
@@ -60,7 +62,7 @@ const staymanResponsesOnFirstLevel: { [bid: string]: Bid } = {
 const standardOneNoTrumpResponses: { [bid: string]: Bid } = {
   "2C": {
     description: "Stayman",
-    alertable: true,
+    alertable,
     responses: staymanResponses("2C")
   },
   "2D": {
@@ -81,29 +83,29 @@ const reverseFlanneryResponses = (bid: BidKey) => {
     },
     "2N": {
       description: "INV, asking",
-      alertable: true,
+      alertable,
       responses: {
         "3C": {
           description: "weak, 5S-4H",
-          alertable: true,
+          alertable,
           responses: {
             "3D": {
               description: "asking for 4th suit stopper",
-              alertable: true
+              alertable
             }
           }
         },
         "3D": {
           description: "GF, 5S-4H",
-          alertable: true
+          alertable
         },
         "3H": {
           description: "weak, 5S-5+H",
-          alertable: true
+          alertable
         },
         "3S": {
           description: "GF, 5S-5H",
-          alertable: true
+          alertable
         }
       }
     },
@@ -139,7 +141,7 @@ const stayman = (bidKey: BidKey): Bid => {
 function checkback(bidKey: BidKey): Bid {
   return {
     description: "INV, Checkback Stayman",
-    alertable: true,
+    alertable,
     responses: {
       "2D": {
         description: "No 4-card major or 3-card support for responder's bid suit"
@@ -157,11 +159,11 @@ function checkback(bidKey: BidKey): Bid {
 export const biddingSystem: { [bid: string]: Bid } = {
   "1C": {
     description: "F, 16+ HCP (or 17+ balanced)",
-    alertable: true,
+    alertable,
     responses: {
       "1D": {
         description: "0-7 HCP, any shape",
-        alertable: true,
+        alertable,
         responses: {
           "1H": {
             description: "4+H, F1",
@@ -254,7 +256,7 @@ export const biddingSystem: { [bid: string]: Bid } = {
                 responses: {
                   "2D": {
                     description: "minimum, artificial, asks responder to show doubleton support or other major",
-                    alertable: true
+                    alertable
                   },
                   "2H": {
                     description: "NF, 6+H"
@@ -264,7 +266,7 @@ export const biddingSystem: { [bid: string]: Bid } = {
                   },
                   "2N": {
                     description: "GF, waiting bid",
-                    alertable: true
+                    alertable
                   },
                   "3C": {
                     description: "GF, 4+H - 6+C"
@@ -279,7 +281,7 @@ export const biddingSystem: { [bid: string]: Bid } = {
               },
               "2D": {
                 description: "F, 3-card fit, (may have 5H over 1♠) – 5-7 HCP",
-                alertable: true,
+                alertable,
                 responses: {
                   "2H": {
                     description: "Rebid major = sign-off, usually 4 cards"
@@ -289,7 +291,7 @@ export const biddingSystem: { [bid: string]: Bid } = {
                   },
                   "2N": {
                     description: "GF",
-                    alertable: true
+                    alertable
                   },
                   "3C": {
                     description: "GF, 4M-6+C"
@@ -340,7 +342,7 @@ export const biddingSystem: { [bid: string]: Bid } = {
               },
               "3S": {
                 description: "GF, 6-7 HCP, 5+H, splinter",
-                alertable: true,
+                alertable,
                 responses: splinterResponses("3S")
               },
               "3N": {
@@ -406,7 +408,7 @@ export const biddingSystem: { [bid: string]: Bid } = {
                 responses: {
                   "2D": {
                     description: "F, minimum, artificial, asks responder to show doubleton support or other major",
-                    alertable: true
+                    alertable
                   },
                   "2H": {
                     description: "NF, 4+H 5+S, minimum"
@@ -416,7 +418,7 @@ export const biddingSystem: { [bid: string]: Bid } = {
                   },
                   "2N": {
                     description: "GF, waiting bid",
-                    alertable: true
+                    alertable
                   },
                   "3C": {
                     description: "GF, 4+S - 6+C"
@@ -434,7 +436,7 @@ export const biddingSystem: { [bid: string]: Bid } = {
               },
               "2D": {
                 description: "F, 5-7 HCP, 3-card fit, (may have 5H over 1S)",
-                alertable: true,
+                alertable,
                 responses: {
                   "2H": {
                     description: "NF, 4+H 5+S"
@@ -444,7 +446,7 @@ export const biddingSystem: { [bid: string]: Bid } = {
                   },
                   "2N": {
                     description: "GF",
-                    alertable: true
+                    alertable
                   },
                   "3C": {
                     description: "GF, 4M-6+C"
@@ -558,7 +560,7 @@ export const biddingSystem: { [bid: string]: Bid } = {
       },
       "1H": {
         description: "GF, 8-11 HCP, any shape; by passed hand: 5+H, 8-10 HCP",
-        alertable: true,
+        alertable,
         responses: {}
       },
       "1S": {
@@ -612,27 +614,27 @@ export const biddingSystem: { [bid: string]: Bid } = {
       },
       "2S": {
         description: "GF, 12+ HCP, any (4441); by passed hand: 8-10 HCP (4441)",
-        alertable: true,
+        alertable,
         responses: {
           "2NT": {
             description: "asks for singleton",
-            alertable: true,
+            alertable,
             responses: {
               "3C": {
                 description: "1C",
-                alertable: true
+                alertable
               },
               "3D": {
                 description: "1D",
-                alertable: true
+                alertable
               },
               "3H": {
                 description: "1H",
-                alertable: true
+                alertable
               },
               "3S": {
                 description: "1S",
-                alertable: true
+                alertable
               }
             }
           }
@@ -649,11 +651,11 @@ export const biddingSystem: { [bid: string]: Bid } = {
   },
   "1D": {
     description: "2+D, Good 10 to 15 HCP",
-    alertable: true,
+    alertable,
     responses: {
       "1H": {
         description: "F1, 4+H",
-        alertable: true,
+        alertable,
         responses: {
           "1S": {
             description: "NF, 4+S"
@@ -692,7 +694,7 @@ export const biddingSystem: { [bid: string]: Bid } = {
       },
       "1S": {
         description: "F1, 4+S",
-        alertable: true,
+        alertable,
         responses: {
           "1N": {
             description: "NF, 11-13 HCP",
@@ -711,11 +713,11 @@ export const biddingSystem: { [bid: string]: Bid } = {
           },
           "2N": {
             description: "NF, 6+D, 14-15 HCP",
-            alertable: true
+            alertable
           },
           "3C": {
             description: "NF, 5-5 minors, 13-15 HCP, decent suits",
-            alertable: true
+            alertable
           },
           "3D": {
             description: "NF, 7+D, 13-15 HCP"
@@ -747,11 +749,11 @@ export const biddingSystem: { [bid: string]: Bid } = {
             responses: {
               "2S": {
                 description: "puppet to 2NT, often just a way to right-side notrump",
-                alertable: true,
+                alertable,
                 responses: {
                   "2N": {
                     description: "forced",
-                    alertable: true,
+                    alertable,
                     responses: {
                       "3C": {
                         description: "GF, slam interest"
@@ -794,11 +796,11 @@ export const biddingSystem: { [bid: string]: Bid } = {
           },
           "2S": {
             description: "GF, 4+C, an undisclosed splinter for partner’s minor (never short diamonds, of course)",
-            alertable: true,
+            alertable,
             responses: {
               "2N": {
                 description: "asks which splinter in steps (steps 1/2/3 show hi/mid/lo)",
-                alertable: true,
+                alertable,
                 responses: {
                   "3C": {
                     description: "splinter in highest suit"
@@ -818,7 +820,7 @@ export const biddingSystem: { [bid: string]: Bid } = {
           },
           "3C": {
             description: "GF, 3 cards in responder’s minor, 5 cards in the other minor, and a 4-card major (3D can now ask which major opener has)",
-            alertable: true
+            alertable
           },
           "3D": {
             description: "GF, a very good 6+D suit",
@@ -836,18 +838,18 @@ export const biddingSystem: { [bid: string]: Bid } = {
       },
       "2D": {
         description: "GF unless suit rebid, 4+D, no 4+M unless 6-4+ suits",
-        alertable: true,
+        alertable,
         responses: {
           "2H": {
             description: "11-13 HCP balanced, says nothing about hearts - could have support for responder's minor",
             responses: {
               "2S": {
                 description: "puppet to 2NT, often just a way to right-side notrump",
-                alertable: true,
+                alertable,
                 responses: {
                   "2N": {
                     description: "forced",
-                    alertable: true,
+                    alertable,
                     responses: {
                       "3C": {
                         description: "???"
@@ -890,11 +892,11 @@ export const biddingSystem: { [bid: string]: Bid } = {
           },
           "2S": {
             description: "GF, 4+D, an undisclosed splinter for partner’s minor (never short diamonds, of course)",
-            alertable: true,
+            alertable,
             responses: {
               "2N": {
                 description: "asks which splinter in steps (steps 1/2/3 show hi/mid/lo)",
-                alertable: true,
+                alertable,
                 responses: {
                   "3C": {
                     description: "splinter in highest suit"
@@ -914,11 +916,11 @@ export const biddingSystem: { [bid: string]: Bid } = {
           },
           "3C": {
             description: "GF, 3 cards in responder’s minor, 5 cards in the other minor, and a 4-card major (3D can now ask which major opener has)",
-            alertable: true,
+            alertable,
             responses: {
               "3D": {
                 description: "ask what major opener has",
-                alertable: true,
+                alertable,
                 responses: {
                   "3H": {
                     description: "4H"
@@ -946,12 +948,12 @@ export const biddingSystem: { [bid: string]: Bid } = {
       },
       "2H": {
         description: "below INV, 5S-4/5H, less than invitational. Reverse Flannery",
-        alertable: true,
+        alertable,
         responses: reverseFlanneryResponses("2H")
       },
       "2S": {
         description: "INV, 5S-4/5H, 6-9 HCP",
-        alertable: true,
+        alertable,
         responses: reverseFlanneryResponses("2S")
       },
       "2N": {
@@ -959,11 +961,11 @@ export const biddingSystem: { [bid: string]: Bid } = {
       },
       "3C": {
         description: "below INV, 5-4 minors at least, either could be longer, 6-10 HCP",
-        alertable: true
+        alertable
       },
       "3D": {
         description: "below INV, 6+D, 5-10 HCP",
-        alertable: true
+        alertable
       },
       "3H": {
         description: "7+H, weak 5-10 HCP"
@@ -976,19 +978,19 @@ export const biddingSystem: { [bid: string]: Bid } = {
       },
       "4C": {
         description: "below INV, 5+C-5+D",
-        alertable: true
+        alertable
       },
       "4D": {
         description: "7+D, to play, wide-range",
-        alertable: true
+        alertable
       },
       "4H": {
         description: "7+H, to play, wide-range",
-        alertable: true
+        alertable
       },
       "4S": {
         description: "7+S, to play, wide-range",
-        alertable: true
+        alertable
       },
       interference: {
         description: "Treat mostly like a standard 1D opening after interference\n\tJumps to 3C, 3D retain their meaning as above\n\tResponder bidding diamonds is not a raise but a new suit"
@@ -996,47 +998,305 @@ export const biddingSystem: { [bid: string]: Bid } = {
     }
   },
   "1H": {
-    description: "5+H, Good 10 to 15 HCP"
+    description: "5+H, Good 10 to 15 HCP",
+    responses: {
+      "4H": {
+        description: "wide range, 3+H",
+        alertable
+      }
+    }
   },
   "1S": {
-    description: "5+S, Good 10 to 15 HCP"
+    description: "5+S, Good 10 to 15 HCP",
+    responses: {
+      "4S": {
+        description: "wide range, 3+S",
+        alertable
+      }
+    }
   },
   "1N": {
-    description: "Balanced, 14-16 HCP",
-    alertable: true
+    description: "Balanced, 14-16 HCP, can have 5 card major and 5m-(422)",
+    alertable,
+    responses: standardOneNoTrumpResponses
   },
   "2C": {
     description: "6+C, Good 10 to 15 HCP",
-    alertable: true,
+    alertable,
     responses: {
       "2D": {
         description: "invite or better inquiry",
-        alertable: true
+        alertable,
+        responses: {
+          "2H": {
+            description: "any 4M",
+            alertable,
+            responses: {
+              "2S": {
+                description: "asks for the 4M suit and strength",
+                alertable,
+                responses: {
+                  "2N": {
+                    description: "4H, 10-13 HCP",
+                    alertable,
+                    responses: {
+                      "3D": {
+                        description: "slam try in C",
+                        alertable
+                      },
+                      "3H": {
+                        description: "slam try in S",
+                        alertable,
+                      },
+                      "3S": {
+                        description: "invite to S game",
+                        alertable,
+                      },
+                      "3N": {
+                        description: "to play"
+                      },
+                      "4S": {
+                        description: "to play"
+                      },
+                      "5C": {
+                        description: "to play"
+                      },
+                    }
+                  },
+                  "3C": {
+                    description: "4S, 10-13 HCP",
+                    alertable,
+                    responses: {
+                      "3D": {
+                        description: "slam try in C",
+                        alertable
+                      },
+                      "3H": {
+                        description: "invite to H game",
+                        alertable,
+                      },
+                      "3S": {
+                        description: "slam try in H",
+                        alertable,
+                      },
+                      "3N": {
+                        description: "to play"
+                      },
+                      "4H": {
+                        description: "to play"
+                      },
+                      "5C": {
+                        description: "to play"
+                      },
+                    }
+                  },
+                  "3D": {
+                    description: "GF, 4H, 14-15 HCP",
+                    alertable,
+                    responses: {
+                      "3H": {
+                        description: "slam try",
+                        alertable,
+                      },
+                      "3N": {
+                        description: "to play"
+                      },
+                      "4H": {
+                        description: "to play"
+                      },
+                      "5C": {
+                        description: "to play"
+                      },
+                    }
+                  },
+                  "3H": {
+                    description: "GF, 4S, 10-13 HCP",
+                    alertable,
+                    responses: {
+                      "3S": {
+                        description: "slam try",
+                        alertable,
+                      },
+                      "3N": {
+                        description: "to play"
+                      },
+                      "4S": {
+                        description: "to play"
+                      },
+                      "5C": {
+                        description: "to play"
+                      },
+                    }
+                  },
+                }
+              },
+              "2N": {
+                description: "INV, natural, no interest in the major"
+              },
+              "3C": {
+                description: "INV, natural, no interest in the major"
+              },
+              "3D": {
+                description: "slam try in clubs"
+              },
+            }
+          },
+          "2S": {
+            description: "a medium or maximum hand, no 4-card major",
+            alertable,
+            responses: {
+              "2N": {
+                description: "asks opener if medium or maximum",
+                alertable,
+                responses: {
+                  "3C": {
+                    description: "medium",
+                    alertable
+                  },
+                  "3D": {
+                    description: "max, singleton/void in D",
+                    alertable
+                  },
+                  "3H": {
+                    description: "max, singleton/void in H",
+                    alertable
+                  },
+                  "3S": {
+                    description: "max, singleton/void in S",
+                    alertable
+                  },
+                  "3N": {
+                    description: "max, no singleton/void",
+                    alertable
+                  }
+                }
+              },
+              "3C": {
+                description: "“the brakes” – responder is no longer interested in game, responder was hoping to catch a major fit, opener must pass",
+                alertable
+              },
+              "3D": {
+                description: "slam try in C",
+                alertable
+              },
+              "3H": {
+                description: "GF, 5H",
+                alertable
+              },
+              "3S": {
+                description: "GF, 5S",
+                alertable
+              },
+            }
+          },
+          "2N": {
+            description: "a maximum hand, with stoppers in both majors, no 4-card major",
+            alertable,
+            responses: {
+              "3D": {
+                description: "slam try in C",
+                alertable,
+              },
+              "3H": {
+                description: "GF, 5H",
+                alertable,
+              },
+              "3S": {
+                description: "GF, 5S",
+                alertable,
+              }
+            }
+          },
+          "3C": {
+            description: "“the pits” – a very minimum hand with not a great suit, no 4-card major",
+            alertable,
+            responses: {
+              "3D": {
+                description: "slam try in C",
+                alertable,
+              },
+              "3H": {
+                description: "GF, 5H",
+                alertable,
+              },
+              "3S": {
+                description: "GF, 5S",
+                alertable,
+              }
+            }
+          },
+          "3D": {
+            description: "GF, 5D",
+            alertable,
+          },
+          "3H": {
+            description: "GF, 5H",
+            alertable,
+          },
+          "3S": {
+            description: "GF, 5S",
+            alertable,
+          }
+        }
       },
       "2H": {
-        description: "NF, 5+H"
+        description: "NF, 5+H, 8-11 HCP",
+        alertable,
+        responses: {
+          "2S": {
+            description: "to play, no tolerance in H"
+          },
+          "2N": {
+            description: "to play, no tolerance in H"
+          },
+          "3C": {
+            description: "to play, 7+C"
+          },
+          "3H": {
+            description: "INV, 3+H"
+          },
+          "4H": {
+            description: "to play"
+          }
+        }
       },
       "2S": {
-        description: "NF, 5+S"
+        description: "NF, 5+S, 8-11 HCP",
+        alertable,
+        responses: {
+          "2N": {
+            description: "to play, no tolerance in H"
+          },
+          "3C": {
+            description: "to play, 7+C"
+          },
+          "3S": {
+            description: "INV, 3+S"
+          },
+          "4S": {
+            description: "to play"
+          }
+        }
       },
       "2N": {
-        description: "puppet to 3C, either to play or some 5-5 suits GF"
+        description: "puppet to 3C, either to play or some 5-5 suits GF",
+        alertable,
       },
       "3C": {
         description: "INV+, 6+D, cards in the next higher suit",
-        alertable: true
+        alertable
       },
       "3D": {
         description: "INV+, 6+H, cards in the next higher suit",
-        alertable: true
+        alertable
       },
       "3H": {
         description: "INV+, 6+S, cards in the next higher suit",
-        alertable: true
+        alertable
       },
       "3S": {
         description: "GF, 6S-4H",
-        alertable: true
+        alertable
       },
       "3N": {
         description: "to play",
@@ -1054,7 +1314,7 @@ export const biddingSystem: { [bid: string]: Bid } = {
   },
   "2D": {
     description: "4414/4405/3415/4315, Good 10 to 15 HCP",
-    alertable: true,
+    alertable,
     responses: {
 
       "2H": {
@@ -1065,7 +1325,7 @@ export const biddingSystem: { [bid: string]: Bid } = {
       },
       "2N": {
         description: "F, strong inquiry",
-        alertable: true
+        alertable
       },
       "3C": {
         description: "to play, 4+C",
@@ -1116,6 +1376,6 @@ export const biddingSystem: { [bid: string]: Bid } = {
   },
   "3N": {
     description: "Gambling - 7+ suit AKQ",
-    alertable: true,
+    alertable,
   },
 };
