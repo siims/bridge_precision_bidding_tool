@@ -1,11 +1,8 @@
 import React, {useState} from "react";
 import "./App.css";
 import _ from "lodash";
-import {allBiddingSequence, Bid, biddingSystem, BidKey} from "./biddingSystemConfiguration";
+import {allBiddingSequence, Bid, biddingSystem, BidKey, naturalBid} from "./biddingSystemConfiguration";
 
-const naturalBid: Bid = {
-  description: "natural"
-};
 
 type Seat = "N" | "E" | "S" | "W";
 
