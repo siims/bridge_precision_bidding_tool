@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/bridge_precision_bidding_tool/precache-manifest.a3381bd5db2aa524526e9b44a9d433e7.js"
+  "/bridge_precision_bidding_tool/precache-manifest.04dfd495354723e8302d60e11861b4b6.js"
 );
 
 self.addEventListener('message', (event) => {
