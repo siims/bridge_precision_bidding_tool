@@ -133,7 +133,11 @@ const App: React.FC = () => {
         </div>
       )}
       {/* BIDDING BUTTONS*/}
-      <div style={{ display: "grid", gridTemplateColumns: "3rem 3rem 3rem 3rem 3rem" }}>
+      <div style={{
+        display: "grid",
+        gridTemplateColumns: "3rem 3rem 3rem 3rem 3rem",
+        gridTemplateRows: "3rem 3rem 3rem 3rem 3rem 3rem 3rem"
+      }}>
         {getPossibleBids(biddingSoFar).map(bidKey => {
           const rowNumber = Number(bidKey[0]);
           const columnNumber =
