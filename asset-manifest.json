@@ -1,15 +1,22 @@
 {
   "files": {
     "main.css": "/bridge_precision_bidding_tool/static/css/main.c0bfb9dc.chunk.css",
-    "main.js": "/bridge_precision_bidding_tool/static/js/main.4d97c50d.chunk.js",
-    "main.js.map": "/bridge_precision_bidding_tool/static/js/main.4d97c50d.chunk.js.map",
-    "runtime~main.js": "/bridge_precision_bidding_tool/static/js/runtime~main.4ba8c86c.js",
-    "runtime~main.js.map": "/bridge_precision_bidding_tool/static/js/runtime~main.4ba8c86c.js.map",
-    "static/js/2.ffad0bf6.chunk.js": "/bridge_precision_bidding_tool/static/js/2.ffad0bf6.chunk.js",
-    "static/js/2.ffad0bf6.chunk.js.map": "/bridge_precision_bidding_tool/static/js/2.ffad0bf6.chunk.js.map",
+    "main.js": "/bridge_precision_bidding_tool/static/js/main.f68e9cba.chunk.js",
+    "main.js.map": "/bridge_precision_bidding_tool/static/js/main.f68e9cba.chunk.js.map",
+    "runtime-main.js": "/bridge_precision_bidding_tool/static/js/runtime-main.2a22b700.js",
+    "runtime-main.js.map": "/bridge_precision_bidding_tool/static/js/runtime-main.2a22b700.js.map",
+    "static/js/2.1b0c6dfb.chunk.js": "/bridge_precision_bidding_tool/static/js/2.1b0c6dfb.chunk.js",
+    "static/js/2.1b0c6dfb.chunk.js.map": "/bridge_precision_bidding_tool/static/js/2.1b0c6dfb.chunk.js.map",
     "index.html": "/bridge_precision_bidding_tool/index.html",
-    "precache-manifest.6d275828334f477626c26ccdc66a8b32.js": "/bridge_precision_bidding_tool/precache-manifest.6d275828334f477626c26ccdc66a8b32.js",
+    "precache-manifest.490225aee4bbfa305ff76ef12c699d05.js": "/bridge_precision_bidding_tool/precache-manifest.490225aee4bbfa305ff76ef12c699d05.js",
     "service-worker.js": "/bridge_precision_bidding_tool/service-worker.js",
-    "static/css/main.c0bfb9dc.chunk.css.map": "/bridge_precision_bidding_tool/static/css/main.c0bfb9dc.chunk.css.map"
-  }
+    "static/css/main.c0bfb9dc.chunk.css.map": "/bridge_precision_bidding_tool/static/css/main.c0bfb9dc.chunk.css.map",
+    "static/js/2.1b0c6dfb.chunk.js.LICENSE.txt": "/bridge_precision_bidding_tool/static/js/2.1b0c6dfb.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.2a22b700.js",
+    "static/js/2.1b0c6dfb.chunk.js",
+    "static/css/main.c0bfb9dc.chunk.css",
+    "static/js/main.f68e9cba.chunk.js"
+  ]
 }
