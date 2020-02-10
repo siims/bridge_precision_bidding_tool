@@ -1,7 +1,6 @@
 {
   "name": "bridge_precision_bidding_tool",
   "version": "0.1.0",
-  "homepage": "https://siims.github.io/bridge_precision_bidding_tool/",
   "private": true,
   "license": "MIT",
   "dependencies": {
@@ -25,8 +24,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "predeploy": "yarn build",
-    "deploy": "gh-pages -d build"
+    "deploy": "PUBLIC_URL=/bridge_precision_bidding_tool/ yarn build && gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
